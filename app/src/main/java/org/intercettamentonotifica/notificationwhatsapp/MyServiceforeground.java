@@ -7,24 +7,27 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import org.intercettamentonotifica.notificationwhatsapp.listnerwhatsapp.MyNotificationListenerWhatsApp;
+
 public class MyServiceforeground extends Service {
+    Context context;
     private boolean bStop = true;
     boolean mStarted = false;
     final static String TAG="WAT";
-
+MyNotificationListenerWhatsApp listnerWhatsapp;
     public MyServiceforeground() {
     }
     @Override
     public void onCreate() {
         super.onCreate();
 
+        context= getApplicationContext();
         Log.d(TAG,"ONcREATE");
     }
     @Override
@@ -50,8 +53,12 @@ public class MyServiceforeground extends Service {
             //start intercept
             bStop = false;
             Log.d(TAG,"START_INTERCEPT_MESSAGE");
+            listnerWhatsapp=new MyNotificationListenerWhatsApp();
         } else if (intent.getAction().equals(Constants.ACTION.STOP_INTERCEPT_MESSAGE)){
             //stop intercept
+            if(bStop=false){
+
+            }
             bStop = true;
             Log.d(TAG,"STOP_INTERCEPT_MESSAGE");
         } else if (intent.getAction().equals(Constants.ACTION.STOP_SERVICE)){
@@ -61,6 +68,8 @@ public class MyServiceforeground extends Service {
             bStop = true;
             stopForeground(true);
             stopSelf();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
         }
 
 

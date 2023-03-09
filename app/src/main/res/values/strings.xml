@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NotificationWhatsApp</string>
+    <string name="saved_nome_whatsapp_key">nomecanzone</string>
+    <string name="default_key">nessuna</string>
 </resources>

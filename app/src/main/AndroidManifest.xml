@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,12 +14,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotificationWhatsApp"
         tools:targetApi="31">
+
+
         <service
             android:name=".MyServiceforeground"
             android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".listnerwhatsapp.MyNotificationListenerWhatsApp"
             android:exported="true"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
 
-            ></service>
+        <receiver
+            android:name=".listnerwhatsapp.MyBroadcastReceiverWathapp"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity
             android:name=".MainActivity"
@@ -27,6 +44,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".listnerwhatsapp.RegistraActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".listnerwhatsapp.SuonaActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

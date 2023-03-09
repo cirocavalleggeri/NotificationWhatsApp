@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="13dp"
+
+    tools:context=".listnerwhatsapp.RegistraActivity">
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inserisci il nominativo whatsApp o parte di esso">
+
+    </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="21dp"></View>
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Inserisci qui il nominativo"
+        android:id="@+id/id_Edit_nominativo_whats_app">
+
+    </EditText>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="21dp"></View>
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registra il nome"
+        android:textColor="@color/black"
+        android:id="@+id/id_BTN_registra_nome_per_il_servizio">
+
+    </Button>
+    <TextView
+        android:layout_marginTop="10dp"
+         android:id="@+id/id_nominativo_registrato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="nominativo registrato">
+
+    </TextView>
+</LinearLayout>
