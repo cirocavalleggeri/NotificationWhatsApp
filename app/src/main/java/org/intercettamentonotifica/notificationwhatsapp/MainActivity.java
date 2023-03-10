@@ -30,6 +30,7 @@ Button nominativoEsattoWhatsApp;
         });
         startServiceIntercept();
         abilitaRicezioneNotifiche();
+		 ignoraBatteria();
     }
 
     private void startServiceIntercept() {
@@ -62,5 +63,17 @@ Button nominativoEsattoWhatsApp;
 
         super.onBackPressed();
 
+    }
+	 private final void ignoraBatteria() {
+        if ( Build.VERSION.SDK_INT >= 23) {
+            Intent intent = new Intent();
+            String packageName = getPackageName();
+            if (!((PowerManager) getSystemService("power")).isIgnoringBatteryOptimizations(packageName)) {
+                intent.setAction("android.settings.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS");
+                intent.setData(Uri.parse("package:" + packageName));
+                startActivity(intent);
+            }
+
+        }
     }
 }

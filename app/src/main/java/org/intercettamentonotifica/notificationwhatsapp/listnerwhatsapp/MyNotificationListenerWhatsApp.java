@@ -95,7 +95,7 @@ public class MyNotificationListenerWhatsApp extends NotificationListenerService 
         Intent intent = new Intent(getBaseContext(), MyBroadcastReceiverWathapp.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), RQS_1, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
         Uri uriAlarm = RingtoneManager.getDefaultUri(R.raw.tiromancino);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         ringTone = RingtoneManager.getRingtone(getApplicationContext(), uriAlarm);
