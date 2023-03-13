@@ -1,18 +1,21 @@
 package org.intercettamentonotifica.notificationwhatsapp.listnerwhatsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+import org.intercettamentonotifica.notificationwhatsapp.Constants;
 import org.intercettamentonotifica.notificationwhatsapp.R;
 
 public class RegistraActivity extends AppCompatActivity {
@@ -35,7 +38,13 @@ Button button_registranome;
                 nomeREgistrato.setText(getNomeDaIntercettare().toString());
             }
         });
+        showScreenUP();
     }
+
+    private void showScreenUP() {
+
+    }
+
     void registraNomeWhatsApp(String nome){
         SharedPreferences sharedPref = getSharedPreferences("NOTIFICHE",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -49,5 +58,19 @@ Button button_registranome;
         String defaultValue = getResources().getString(R.string.default_key);
         String nome = sharedPref.getString(getString(R.string.saved_nome_whatsapp_key), defaultValue);
         return nome.trim();
+    }
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimerPickerFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("dato", Constants.ORARIO.ORARIO_DI_PARTENZA);
+        newFragment.setArguments(bundle);
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+    public void showTimePickerDialogFinale(View v) {
+        DialogFragment newFragment = new TimerPickerFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("dato", Constants.ORARIO.ORARIO_FINALE);
+        newFragment.setArguments(bundle);
+        newFragment.show(getSupportFragmentManager(), "timePickerfinale");
     }
 }

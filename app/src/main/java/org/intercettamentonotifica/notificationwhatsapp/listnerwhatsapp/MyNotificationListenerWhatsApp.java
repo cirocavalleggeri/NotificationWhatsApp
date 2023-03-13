@@ -58,8 +58,7 @@ public class MyNotificationListenerWhatsApp extends NotificationListenerService 
 
 
            if (!(pack.equals("android"))){
-               // myListener.setValue(sbn.getPackageName(), titleData, textData, String.valueOf(sbn.getTag()));
-                //registra sul database ma a noi interessa solo per debug quindi lo commentiamo
+
                 Log.d("WAT","MESSAGGIO DA WATSAPP:"+sbn.getPackageName()+":"+titleData+":"+String.valueOf(sbn.getTag()));
                if( titleData.contains( getNomeDaIntercettare())){
                    impostaOrario();
@@ -83,9 +82,6 @@ public class MyNotificationListenerWhatsApp extends NotificationListenerService 
         super.onNotificationRankingUpdate(rankingMap);
     }
 
-   /* public void setListener (MyListener myListener) {
-        MyNotificationListenerWhatsApp. myListener = myListener ;
-    }*/
 
 
     private void setAlarm(Calendar targetCal){
@@ -99,9 +95,7 @@ public class MyNotificationListenerWhatsApp extends NotificationListenerService 
         Uri uriAlarm = RingtoneManager.getDefaultUri(R.raw.tiromancino);
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
         ringTone = RingtoneManager.getRingtone(getApplicationContext(), uriAlarm);
-        /*if((targetCal.getTime()).equals(currentDateTimeString)){
-            ringTone = RingtoneManager.getRingtone(getApplicationContext(), uriAlarm);
-        }*/
+
     }
     private void impostaOrario(){
         Calendar current = Calendar.getInstance();

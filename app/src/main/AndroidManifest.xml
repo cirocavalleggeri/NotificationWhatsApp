@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotificationWhatsApp"
         tools:targetApi="31">
-
+        <service
+            android:name=".MyServiceSpeak"
+            android:enabled="true"
+            android:exported="false" />
 
         <service
             android:name=".MyServiceforeground"
@@ -35,7 +38,18 @@
             android:name=".listnerwhatsapp.MyBroadcastReceiverWathapp"
             android:enabled="true"
             android:exported="true" />
+        <receiver
+            android:name=".ReceiverAutoBoot"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
 
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -47,6 +61,8 @@
         </activity>
         <activity
             android:name=".listnerwhatsapp.RegistraActivity"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
             android:exported="true"></activity>
         <activity
             android:name=".listnerwhatsapp.SuonaActivity"

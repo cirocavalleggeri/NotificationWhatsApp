@@ -1,4 +1,4 @@
-package org.altervista.ultimaprovaprimadi.ciromelody.autobootyourapp;
+package org.intercettamentonotifica.notificationwhatsapp;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
+
+import org.intercettamentonotifica.notificationwhatsapp.MainActivity;
 
 public class ReceiverAutoBoot extends BroadcastReceiver {
 
@@ -20,7 +22,7 @@ public class ReceiverAutoBoot extends BroadcastReceiver {
                 Log.d("BOOT","  restartApp(context)" );
 
         }
-        if (intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) ){
+        if ((intent.getAction().equals(Intent.ACTION_BOOT_COMPLETED) )||(intent.getAction().equals(Intent.ACTION_LOCKED_BOOT_COMPLETED) )){
             Intent i = new Intent(context, MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(i);
@@ -31,7 +33,7 @@ public class ReceiverAutoBoot extends BroadcastReceiver {
         Log.d("BOOT"," App riparte dopo 15 secondi cambiare i secondi se sono più App che devono ripartire");
         Log.d("BOOT"," Importante!!!Da impostazioni del telefono autorizzare questa app all riavvio");
         try {
-            long restartTime = 1000*15;
+            long restartTime = 1000*10;
             Intent intents = mContext.getPackageManager().getLaunchIntentForPackage(mContext.getPackageName());//qui puoi mettere anche il pacchetto di un'altra app
             PendingIntent restartIntent = PendingIntent.getActivity(mContext, 0, intents, PendingIntent.FLAG_ONE_SHOT);
             AlarmManager mgr = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);

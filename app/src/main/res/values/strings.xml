@@ -2,4 +2,9 @@
     <string name="app_name">NotificationWhatsApp</string>
     <string name="saved_nome_whatsapp_key">nomecanzone</string>
     <string name="default_key">nessuna</string>
+    <string name="pick_time">scegli un orario che non deve suonare</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pick_time_partenza">orario di partenza</string>
+    <string name="pick_time_finale">orario finale</string>
 </resources>

@@ -11,10 +11,31 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import org.intercettamentonotifica.notificationwhatsapp.MyServiceSpeak;
+import org.intercettamentonotifica.notificationwhatsapp.ReceiverScreenOn;
+
 public class ApplicationMain extends Application {
+    ReceiverScreenOn mREceiverScreenOn;
     @Override
     public void onCreate() {
+
         super.onCreate();
+        mREceiverScreenOn=new ReceiverScreenOn();
+        registraScreenOn();
+        tiParlo("Buongiorno");
+        tiParlo("Buongiorno");
+        tiParlo("Questa app intercetta i messaggi di un singolo utente WhatsApp,registra il nome del contatto");
+        dozeMode();
+    }
+
+    private void registraScreenOn() {
+        IntentFilter screenStateFilter = new IntentFilter();
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
+        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        registerReceiver(mREceiverScreenOn, screenStateFilter);
+
+
+       // unregisterReceiver(mScreenStateReceiver);
     }
 
     public Context getContext() {
@@ -33,12 +54,12 @@ public class ApplicationMain extends Application {
 
                     if (pm.isDeviceIdleMode()) {
                         Log.d("WAT", "Vado a dormire");
-
+                        tiParlo("Vado a dormire");
                         // the device is now in doze mode
                     } else {
                         // the device just woke up from doze mode
                         Log.d("WAT","Appena svegliato");}
-
+                        tiParlo("Appena svegliato");
                 }
             };
 
@@ -64,5 +85,11 @@ public class ApplicationMain extends Application {
 
     }
 
+    private void tiParlo(String messaggio_speak){
+        Intent i = new Intent(this, MyServiceSpeak.class);
+        // Add extras to the bundle
+        i.putExtra("messaggio",  messaggio_speak);
 
+        getBaseContext().startService(i);
+    }
 }
