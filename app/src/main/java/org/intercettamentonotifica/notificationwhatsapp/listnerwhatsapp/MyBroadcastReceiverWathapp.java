@@ -20,12 +20,12 @@ MediaPlayer mp;
         mp.start();
 
 
-        Log.v(this.toString(), "Inside onReceive.");
+        /*Log.v(this.toString(), "Inside onReceive.");
         Intent startActivityIntent = new Intent(context, SuonaActivity.class);
         startActivityIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         Log.v(this.toString(), "Starting new activity.");
         context.getApplicationContext().startActivity(startActivityIntent);
         Log.v(this.toString(), "Activity should have started.");
-        Toast.makeText(context, "Alarm...di pending intent.", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Alarm...di pending intent.", Toast.LENGTH_LONG).show();*/
     }
 }

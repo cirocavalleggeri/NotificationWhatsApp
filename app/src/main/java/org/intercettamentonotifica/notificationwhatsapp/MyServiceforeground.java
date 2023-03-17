@@ -111,7 +111,7 @@ MyNotificationListenerWhatsApp listnerWhatsapp;
                 .setOngoing(true)
                 .addAction(R.drawable.icons8whatsapp, "Start Intercept",
                         PendingIntent.getForegroundService(this, Constants.NOTIFICATION_ID.LOCATION_RANGING_SERVICE, startRangingIntent, 0))
-                .addAction(R.drawable.icons8whatsapp, "Stop Intercept",
+                .addAction(R.drawable.icons8whatsapp, "Stop Musica",
                         PendingIntent.getForegroundService(this, Constants.NOTIFICATION_ID.LOCATION_RANGING_SERVICE, stopRangingIntent, 0))
                 .addAction(R.drawable.icons8whatsapp, "Kill service",
                         PendingIntent.getForegroundService(this, Constants.NOTIFICATION_ID.LOCATION_RANGING_SERVICE, quitRangingIntent, 0))
