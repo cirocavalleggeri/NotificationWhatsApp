@@ -16,6 +16,7 @@ import org.intercettamentonotifica.notificationwhatsapp.ReceiverScreenOn;
 
 public class ApplicationMain extends Application {
     ReceiverScreenOn mREceiverScreenOn;
+    public static boolean sCreenOn;
     @Override
     public void onCreate() {
 
@@ -24,7 +25,7 @@ public class ApplicationMain extends Application {
         registraScreenOn();
         tiParlo("Buongiorno");
         tiParlo("Buongiorno");
-        tiParlo("Questa app intercetta i messaggi di un singolo utente WhatsApp,registra il nome del contatto");
+       // tiParlo("Questa app intercetta i messaggi di un singolo utente WhatsApp,registra il nome del contatto");
         dozeMode();
     }
 
@@ -89,7 +90,7 @@ public class ApplicationMain extends Application {
         Intent i = new Intent(this, MyServiceSpeak.class);
         // Add extras to the bundle
         i.putExtra("messaggio",  messaggio_speak);
-
         getBaseContext().startService(i);
+
     }
 }

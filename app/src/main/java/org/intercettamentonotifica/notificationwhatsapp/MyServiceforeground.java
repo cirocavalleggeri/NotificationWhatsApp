@@ -1,5 +1,6 @@
 package org.intercettamentonotifica.notificationwhatsapp;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -14,6 +15,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat;
 
 import org.intercettamentonotifica.notificationwhatsapp.listnerwhatsapp.MyNotificationListenerWhatsApp;
+import org.intercettamentonotifica.notificationwhatsapp.listnerwhatsapp.SuonaActivity;
 
 public class MyServiceforeground extends Service {
     Context context;
@@ -54,12 +56,23 @@ MyNotificationListenerWhatsApp listnerWhatsapp;
             bStop = false;
             Log.d(TAG,"START_INTERCEPT_MESSAGE");
             listnerWhatsapp=new MyNotificationListenerWhatsApp();
+
         } else if (intent.getAction().equals(Constants.ACTION.STOP_INTERCEPT_MESSAGE)){
             //stop intercept
-            if(bStop=false){
-
+            if(!bStop){
+                /*lanciaactivity();
+                stopForeground(true);
+                stopSelf();
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+                Log.d(TAG,"STOP_INTERCEPT_MESSAGE");*/
             }
             bStop = true;
+            lanciaactivity();
+            stopForeground(true);
+            stopSelf();
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(1);
             Log.d(TAG,"STOP_INTERCEPT_MESSAGE");
         } else if (intent.getAction().equals(Constants.ACTION.STOP_SERVICE)){
             //stop service
@@ -109,6 +122,18 @@ MyNotificationListenerWhatsApp listnerWhatsapp;
                 notification);
 
     }
-
+    void lanciaactivity(){
+        Intent notifyIntent = new Intent(this, MainActivity.class);
+// Set the Activity to start in a new, empty task
+   /* notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+            | Intent.FLAG_ACTIVITY_CLEAR_TASK);*/
+// Create the PendingIntent
+        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
+                this, 2, notifyIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE
+        );
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+60000, notifyPendingIntent);
+    }
 
 }

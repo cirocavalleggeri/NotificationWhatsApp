@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 
@@ -29,9 +30,16 @@ Button nominativoEsattoWhatsApp;
                 startActivity(intent);
             }
         });
+
+        tiParlo("Questa app intercetta i messaggi di un singolo utente WhatsApp,registra il nome del contatto,autorizza in impostazione la partenza dell app al riavvio del telefono,CONCEDI L'ACCESSO ALLE NOTIFICHE");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         startServiceIntercept();
         abilitaRicezioneNotifiche();
-		 ignoraBatteria();
+        ignoraBatteria();
     }
 
     private void startServiceIntercept() {
@@ -42,8 +50,15 @@ Button nominativoEsattoWhatsApp;
         }else {startService(startIntent);}
     }
     void abilitaRicezioneNotifiche(){
-        Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-        startActivity(intent);
+        if (Settings.Secure.getString(this.getContentResolver(),"enabled_notification_listeners").contains(getApplicationContext().getPackageName()))
+        {
+            //service is enabled do something
+            //il servizio è abilitato non fare niente
+        } else {
+            Intent intent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            startActivity(intent);
+        }
+
     }
 
     protected  boolean isNetworkAvailable() {
@@ -56,13 +71,14 @@ Button nominativoEsattoWhatsApp;
     public void onBackPressed() {
    /*    Scrivi qui il tuo codice prima di uscire
         }*/
+        super.onBackPressed();
         if(isNetworkAvailable()){
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ultimaprovaprimadi.altervista.org/le-mie-app-android/"));
             startActivity(browserIntent);
 
         }
 
-        super.onBackPressed();
+
 
     }
 	 private final void ignoraBatteria() {
@@ -76,5 +92,12 @@ Button nominativoEsattoWhatsApp;
             }
 
         }
+    }
+    private void tiParlo(String messaggio_speak){
+        Intent i = new Intent(this, MyServiceSpeak.class);
+        // Add extras to the bundle
+        i.putExtra("messaggio",  messaggio_speak);
+
+        getBaseContext().startService(i);
     }
 }
