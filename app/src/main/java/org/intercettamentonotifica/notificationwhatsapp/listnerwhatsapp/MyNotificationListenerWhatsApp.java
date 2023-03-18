@@ -15,6 +15,7 @@ import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
 import org.intercettamentonotifica.notificationwhatsapp.MainActivity;
+import org.intercettamentonotifica.notificationwhatsapp.MyServiceSpeak;
 import org.intercettamentonotifica.notificationwhatsapp.R;
 
 import java.text.DateFormat;
@@ -67,6 +68,7 @@ public class MyNotificationListenerWhatsApp extends NotificationListenerService 
                    //imposta allarme
                }
 
+               tiParlo("messaggio da WhatsApp,da parte di:"+titleData+",che dice:"+textData);
            }
 
         }
@@ -129,5 +131,11 @@ void lanciaactivity(){
     AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
     alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+5000, notifyPendingIntent);
 }
+    private void tiParlo(String messaggio_speak){
+        Intent i = new Intent(this, MyServiceSpeak.class);
+        // Add extras to the bundle
+        i.putExtra("messaggio",  messaggio_speak);
+        getBaseContext().startService(i);
 
+    }
 }
