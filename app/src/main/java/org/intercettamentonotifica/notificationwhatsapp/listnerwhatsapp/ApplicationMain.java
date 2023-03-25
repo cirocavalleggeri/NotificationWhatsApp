@@ -29,6 +29,8 @@ public class ApplicationMain extends Application {
         dozeMode();
     }
 
+
+
     private void registraScreenOn() {
         IntentFilter screenStateFilter = new IntentFilter();
         screenStateFilter.addAction(Intent.ACTION_SCREEN_ON);
@@ -91,6 +93,6 @@ public class ApplicationMain extends Application {
         // Add extras to the bundle
         i.putExtra("messaggio",  messaggio_speak);
         getBaseContext().startService(i);
-
+        
     }
 }

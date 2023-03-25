@@ -66,9 +66,10 @@ public class MyNotificationListenerWhatsApp extends NotificationListenerService 
                  // lanciaactivity();// non funziona
                    Log.d("WAT","INTERCETTATO:"+sbn.getPackageName()+":"+titleData+":"+String.valueOf(sbn.getTag()));
                    //imposta allarme
-               }
+               }else {
 
-               tiParlo("messaggio da WhatsApp,da parte di:"+titleData+",che dice:"+textData);
+                  tiParlo("messaggio da WhatsApp,da parte di:"+titleData+",che dice:"+textData);
+                  }
            }
 
         }
@@ -135,7 +136,7 @@ void lanciaactivity(){
         Intent i = new Intent(this, MyServiceSpeak.class);
         // Add extras to the bundle
         i.putExtra("messaggio",  messaggio_speak);
-        getBaseContext().startService(i);
+        getApplicationContext().startService(i);
 
     }
 }
